@@ -17,14 +17,9 @@ import java.util.Scanner;
  */
 
 public final class Network {
-    private static final String DEFAULT_SORT = "popular";
-    private static final String BASE_MOVIE_URL =
-            "https://api.themoviedb.org/3/movie/";
-    private static final String POPULAR_MOVIE_URL =
-            "https://api.themoviedb.org/3/movie/popular";
 
-    private static final String TOP_RATED_MOVIE_URL =
-            "https://api.themoviedb.org/3/movie/top_rated";
+    private static final String BASE_MOVIE_URL =
+            "https://api.themoviedb.org/3/movie";
 
     final static int NUM_PAGE = 1;
     final static String PAGE_PARAM = "page";
@@ -38,8 +33,9 @@ public final class Network {
         String api_key = context.getString(R.string.API_KEY);
         return api_key;
     }
-    //build URL for popular
-    public static URL buildURLPopular(Context context, String sortBy) {
+
+
+    public static URL buildURL(Context context, String sortBy) {
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                 .appendPath(sortBy)
                 .appendQueryParameter(api, getApiKey(context))

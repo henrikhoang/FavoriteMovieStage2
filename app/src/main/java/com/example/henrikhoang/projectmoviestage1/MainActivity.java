@@ -64,8 +64,8 @@ LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceC
         Bundle bundleForLoader = null;
         getSupportLoaderManager().initLoader(loaderId, bundleForLoader, callback);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
 
@@ -87,9 +87,10 @@ LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceC
 
             @Override
             public List<Film> loadInBackground() {
+
                 String sortBy = MoviePreferences.getPreferredSort(MainActivity.this);
                 Log.d(TAG, "Sort by " + sortBy);
-                URL movieRequestURL = Network.buildURLPopular(MainActivity.this, sortBy);
+                URL movieRequestURL = Network.buildURL(MainActivity.this, sortBy);
                 try {
                     String jsonMovieResponse = Network.
                             getResponseFromHttpUrl(movieRequestURL);

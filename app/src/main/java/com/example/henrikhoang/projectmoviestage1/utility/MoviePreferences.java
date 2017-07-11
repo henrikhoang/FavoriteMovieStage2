@@ -2,7 +2,7 @@ package com.example.henrikhoang.projectmoviestage1.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceManager;
 
 import com.example.henrikhoang.projectmoviestage1.R;
 

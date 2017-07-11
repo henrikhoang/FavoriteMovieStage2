@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Favourite Movie</string>
+    <string name="error_message">Failed to load data, error occured</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="TOP_RATED">Top Rated</string>
+    <string name="POPULAR">Popular</string>
+    <string name="SORT_BY">Sort by</string>
+    <string name="instruction">Error occured, please hit REFRESH button</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Preferences-->
+    <string name="pref_sortby_popular_label">Popular</string>
+    <string name="pref_sortby_popular_value">popular</string>
+    <string name="pref_sortby_rating_label">Top Rated</string>
+    <string name="pref_sortby_rating_value">top_rated</string>
+    <string name="pref_sortby_label">sort by</string>
+    <string name="pref_sortby_value">Sort By</string>
+
+    <!--API key-->
+    <string name="API_KEY">6712d9f6ddd870ad1a45854cde7e9e63</string>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/databinding/baseLibrary/2.3.1/baseLibrary-2.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2626e02aa9592edd5386d87408e05727303d9ded">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10/baseLibrary-2.3.1_45ff8b5297dae1cdea196560e4beefe7fd169b37/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/.android/build-cache/e9b85a46d1b83261cd79e0a6c8d35c48921cdbf0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7f2f348b830f292429db987f74ba3e67c6752322">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2392f41fd6893fe9461fa13fbf91c06c5e45824a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/Downloads/FavMovieStage2-Testing/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7b162efce673952d971aae5811784ecd54e9f29b">
+        <dex dex="/Users/henrikhoang/Downloads/FavMovieStage2-Testing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7810a78dbac1d7f7303b4cc8a1d994e03724c46f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/.android/build-cache/b6cceadd3d4232127d6624c964e9f8355e73529b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="68956f5ba1517b7a3d513ba540548e257741cbae">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4e29a1a1655df8b0a87c52d838c34bf7ba6d1331/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/.gradle/caches/modules-2/files-2.1/org.parceler/parceler-api/1.1.6/2a06b6b1ecf5dadee8a874dfb51ad018fde3e6c5/parceler-api-1.1.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a06b6b1ecf5dadee8a874dfb51ad018fde3e6c5">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10/parceler-api-1.1.6_c7a8d62059ef9b4b1c1e5bf8f3b9194b0c5eedc0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/Downloads/FavMovieStage2-Testing/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/Users/henrikhoang/Downloads/FavMovieStage2-Testing/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_ed19dffebc1c5511d5e84f1682d18bd951709d7a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/.android/build-cache/5e1dcd1d2c1ddf30ac502a8254d9ecf1a172196e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a200389b6c5adb38be8830f85fb5d3bb35ec9950">
+        <dex dex="/Users/henrikhoang/Downloads/FavMovieStage2-Testing/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ce913790ed67f5e2f13a5b3dc35dbd94691e690c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e750b43d672f7c1d3972a8a82399197a4174007f">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_5365ee5f62a24b1e42b2216d42fb779dcb5ae96c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/Users/henrikhoang/Documents/workspace/UdaCity/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_1d10207aaa5a1610566edfbe7ac3f089faf8dd9d/classes.dex" />
+    </item>
+
+</items>

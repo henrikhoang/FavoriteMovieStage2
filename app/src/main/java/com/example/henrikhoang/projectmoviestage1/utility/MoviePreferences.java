@@ -14,7 +14,7 @@ public class MoviePreferences {
     public static String getPreferredSort(Context context) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
-        String keyForSort = context.getString(R.string.pref_sortby_popular_label);
+        String keyForSort = context.getString(R.string.pref_sortby_label);
         String defaultSort = context.getString(R.string.pref_sortby_popular_value);
         return prefs.getString(keyForSort, defaultSort);
     }

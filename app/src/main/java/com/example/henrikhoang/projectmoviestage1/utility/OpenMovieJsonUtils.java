@@ -23,6 +23,7 @@ public final class OpenMovieJsonUtils {
     final static String VOTE = "vote_average";
     final static String PLOT = "overview";
     final static String POSTER = "poster_path";
+    final static String ID = "id";
 
     public static List<Film> getSimpleMovieStringsFromJson(Context context, String movieJsonStr)
             throws JSONException {
@@ -46,6 +47,7 @@ public final class OpenMovieJsonUtils {
             tempFilm.setOverview(selectedMovie.getString(PLOT));
             tempFilm.setVote(selectedMovie.getDouble(VOTE));
             tempFilm.setPosterPath(selectedMovie.getString(POSTER));
+            tempFilm.setId(selectedMovie.getInt(ID));
 
             films.add(tempFilm);
 

@@ -18,18 +18,16 @@ import com.example.henrikhoang.projectmoviestage1.R;
 public class SettingsFragment extends PreferenceFragmentCompat implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private void setPreferenceSummary(Preference preference, Object value) {
-        String stringValue = value.toString();
+    private void setPreferenceSummary(Preference preference, String value) {
+
         String key = preference.getKey();
 
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
-            int prefIndex = listPreference.findIndexOfValue(stringValue);
+            int prefIndex = listPreference.findIndexOfValue(value);
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
-        } else {
-            preference.setSummary(stringValue);
         }
 
     }
@@ -69,7 +67,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         Preference preference = findPreference(key);
         if (null != preference) {
             if (!(preference instanceof CheckBoxPreference)) {
-                setPreferenceSummary(preference, sharedPreferences.getString(key, ""));
+                setPreferenceSummary(preference, sharedPreferences.getString(preference.getKey(), ""));
             }
         }
     }

@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.henrikhoang.projectmoviestage1.Settings.SettingsActivity;
+import com.example.henrikhoang.projectmoviestage1.data.MovieContract;
 import com.example.henrikhoang.projectmoviestage1.utility.MoviePreferences;
 import com.example.henrikhoang.projectmoviestage1.utility.Network;
 import com.example.henrikhoang.projectmoviestage1.utility.OpenMovieJsonUtils;
@@ -30,7 +31,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
-LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceChangeListener {
+LoaderManager.LoaderCallbacks<List<Film>>,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView mRecyclerView;
@@ -39,6 +41,17 @@ LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceC
     private MovieAdapter mMovieAdapter;
     private static final int MOVIE_LOADER_ID = 0;
     private static boolean PREF_HAVE_BEEN_UPDATED = false;
+
+    public static final String[] MAIN_MOVIE_PROJECTION = {
+            MovieContract.MovieEntry.COLUMN_POSTER
+    };
+
+    public static final int INDEX_MOVIE_POSTER = 0;
+
+    private static final int ID_MOVIE_LOADER = 176;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +66,7 @@ LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceC
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mMovieAdapter = new MovieAdapter(this, getApplicationContext());
+        mMovieAdapter = new MovieAdapter(this, this);
 
         mRecyclerView.setAdapter(mMovieAdapter);
 
@@ -88,17 +101,29 @@ LoaderManager.LoaderCallbacks<List<Film>>, SharedPreferences.OnSharedPreferenceC
             @Override
             public List<Film> loadInBackground() {
 
-                String sortBy = MoviePreferences.getPreferredSort(MainActivity.this);
-                Log.d(TAG, "Sort by " + sortBy);
-                URL movieRequestURL = Network.buildURL(MainActivity.this, sortBy);
                 try {
+                    String sortBy = MoviePreferences.getPreferredSort(MainActivity.this);
+                    Log.d(TAG, "Sort by " + sortBy);
+                    if (sortBy.equals("popular")) {
+
+                    URL movieRequestURL = Network.buildURL(MainActivity.this, sortBy);
+
                     String jsonMovieResponse = Network.
                             getResponseFromHttpUrl(movieRequestURL);
 
                     List<Film> movies = OpenMovieJsonUtils.getSimpleMovieStringsFromJson(MainActivity.this,
                             jsonMovieResponse);
                     return movies;
+                } else {
+                        URL movieRequestURL = Network.buildURL(MainActivity.this, "top_rated");
 
+                        String jsonMovieResponse = Network.
+                                getResponseFromHttpUrl(movieRequestURL);
+
+                        List<Film> movies = OpenMovieJsonUtils.getSimpleMovieStringsFromJson(MainActivity.this,
+                                jsonMovieResponse);
+                        return movies;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;

@@ -1,6 +1,7 @@
 package com.example.henrikhoang.projectmoviestage1;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +21,20 @@ import java.util.List;
 public class MovieAdapter
         extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    private List<Film> films;
+    private final Context mContext;
+//    private List<Film> films;
     private final MovieAdapterOnClickHandler mClickHandler;
-    private Context context;
+
 
     public interface MovieAdapterOnClickHandler {
-        void onClick (Film film);
+        void onClick (String movieSelected);
     }
+
+    private Cursor mCursor;
 
     public MovieAdapter(MovieAdapterOnClickHandler clickHandler, Context ctx) {
         mClickHandler = clickHandler;
-        context = ctx;
+        mContext = ctx;
     }
 
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -46,9 +50,7 @@ public class MovieAdapter
 
         @Override
         public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            Film film = films.get(adapterPosition);
-            mClickHandler.onClick(film);
+           String movieSeleceted = mMovieImageView.getI
         }
     }
 
@@ -65,17 +67,30 @@ public class MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
-        final Film film = films.get(position);
-        String movieBeingSelectedPoster = film.getPosterPath();
-        Picasso.with(context).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
+//        final Film film = films.get(position);
+//        String movieBeingSelectedPoster = film.getPosterPath();
+//        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
+
+        mCursor.moveToPosition(position);
+
+        String movieBeingSelectedPoster = mCursor.getString(MainActivity.INDEX_MOVIE_POSTER);
+
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
     }
 
     @Override
     public int getItemCount() {
-        if (null == films) return 0;
-        return films.size();
+//        if (null == films) return 0;
+//        return films.size();
+
+        if (null == mCursor) return 0;
+        return mCursor.getCount();
     }
 
+    void swapCursor(Cursor newCursor) {
+        mCursor = newCursor;
+        notifyDataSetChanged();
+    }
     public void setMovieData(List<Film> movies) {
         films = movies;
         notifyDataSetChanged();

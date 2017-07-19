@@ -1,9 +1,11 @@
 package com.example.henrikhoang.projectmoviestage1.utility;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import com.example.henrikhoang.projectmoviestage1.Film;
+import com.example.henrikhoang.projectmoviestage1.data.MovieContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +57,40 @@ public final class OpenMovieJsonUtils {
 
         return films;
 
+    }
+
+    public static ContentValues[] getMovieContentValuesFromJson (Context context, String movieJsonStr)
+    throws JSONException {
+        JSONObject movieJson = new JSONObject(movieJsonStr);
+
+        JSONArray movieArray = movieJson.getJSONArray(RESULT);
+        ContentValues[] movieContentValues = new ContentValues[movieArray.length()];
+
+        for (int i = 0; i < movieArray.length(); i++) {
+            String title,date, plot, poster;
+            int vote, id;
+
+            JSONObject selectedMovie = movieArray.getJSONObject(i);
+            title = selectedMovie.getString(TITLE);
+            date = selectedMovie.getString(RELEASE_DATE);
+            plot = selectedMovie.getString(PLOT);
+            poster = selectedMovie.getString(POSTER);
+
+            vote = selectedMovie.getInt(VOTE);
+            id = selectedMovie.getInt(ID);
+
+            ContentValues movieValues = new ContentValues();
+            movieValues.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID, id);
+            movieValues.put(MovieContract.MovieEntry.COLUMN_POSTER, poster);
+            movieValues.put(MovieContract.MovieEntry.COLUMN_OVERVIEW, plot);
+            movieValues.put(MovieContract.MovieEntry.COLUMN_RELEASE_DATE, date);
+            movieValues.put(MovieContract.MovieEntry.COLUMN_VOTE, vote);
+            movieValues.put(MovieContract.MovieEntry.COLUMN_TITLE, title);
+
+            movieContentValues[i] = movieValues;
+
+        }
+        return movieContentValues;
     }
 
 }

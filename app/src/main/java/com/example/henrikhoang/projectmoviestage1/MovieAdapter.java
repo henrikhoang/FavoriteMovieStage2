@@ -2,7 +2,9 @@ package com.example.henrikhoang.projectmoviestage1;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 
 /**
@@ -27,41 +27,25 @@ public class MovieAdapter
 
 
     public interface MovieAdapterOnClickHandler {
-        void onClick (String movieSelected);
+        void onClick (int selectedMovieId);
     }
 
     private Cursor mCursor;
 
-    public MovieAdapter(MovieAdapterOnClickHandler clickHandler, Context ctx) {
+    public MovieAdapter(MovieAdapterOnClickHandler clickHandler,@NonNull Context ctx) {
         mClickHandler = clickHandler;
         mContext = ctx;
     }
 
-    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
-
-        private final ImageView mMovieImageView;
-
-        public MovieAdapterViewHolder(View view) {
-            super(view);
-            mMovieImageView = (ImageView) view.findViewById(R.id.tv_movie_poster);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-           String movieSeleceted = mMovieImageView.getI
-        }
-    }
 
     @Override
     public MovieAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)  {
-        Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.movie_list_item;
-        LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentsImmediately = false;
 
-        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentsImmediately);
+        View view = LayoutInflater
+                .from(mContext)
+                .inflate(R.layout.movie_list_item, viewGroup, false);
+        view.setFocusable(true);
         return new MovieAdapterViewHolder(view);
     }
 
@@ -74,6 +58,8 @@ public class MovieAdapter
         mCursor.moveToPosition(position);
 
         String movieBeingSelectedPoster = mCursor.getString(MainActivity.INDEX_MOVIE_POSTER);
+
+        Log.e(MovieAdapter.class.getSimpleName(), "Poster path: " + movieBeingSelectedPoster);
 
         Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
     }
@@ -91,8 +77,24 @@ public class MovieAdapter
         mCursor = newCursor;
         notifyDataSetChanged();
     }
-    public void setMovieData(List<Film> movies) {
-        films = movies;
-        notifyDataSetChanged();
+
+    class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
+
+
+        final ImageView mMovieImageView;
+
+         MovieAdapterViewHolder(View view) {
+            super(view);
+            mMovieImageView = (ImageView) view.findViewById(R.id.tv_movie_poster);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mCursor.moveToPosition(adapterPosition);
+            int movieId = mCursor.getInt(MainActivity.INDEX_MOVIE_ID);
+            mClickHandler.onClick(movieId);
+        }
     }
 }

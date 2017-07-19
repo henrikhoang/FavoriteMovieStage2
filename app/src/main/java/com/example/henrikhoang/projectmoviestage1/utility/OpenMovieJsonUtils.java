@@ -75,7 +75,6 @@ public final class OpenMovieJsonUtils {
             date = selectedMovie.getString(RELEASE_DATE);
             plot = selectedMovie.getString(PLOT);
             poster = selectedMovie.getString(POSTER);
-
             vote = selectedMovie.getInt(VOTE);
             id = selectedMovie.getInt(ID);
 

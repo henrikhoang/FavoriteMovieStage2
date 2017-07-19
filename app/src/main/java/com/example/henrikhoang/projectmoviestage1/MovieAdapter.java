@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 
 /**
  * Created by henrikhoang on 5/25/17.
@@ -22,7 +24,7 @@ public class MovieAdapter
         extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
     private final Context mContext;
-//    private List<Film> films;
+    private List<Film> films;
     private final MovieAdapterOnClickHandler mClickHandler;
 
 

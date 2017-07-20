@@ -16,6 +16,8 @@
     <string name="pref_sortby_label">sort by</string>
     <string name="pref_sortby_value">Sort By</string>
 
+    <string name="content_authority">com.example.henrikhoang.projectmoviestage1</string>
+
     <!--API key-->
     <string name="API_KEY">6712d9f6ddd870ad1a45854cde7e9e63</string>
     //INSERT YOUR API KEY HERE

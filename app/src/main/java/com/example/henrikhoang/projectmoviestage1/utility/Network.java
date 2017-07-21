@@ -53,6 +53,39 @@ public final class Network {
         return url;
     }
 
+    public static URL buildTrailerURL(Context context, int id) {
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendPath(String.valueOf(id))
+                .appendPath(context.getString(R.string.video_trailers))
+                .appendQueryParameter(api, getApiKey(context))
+                .build();
+
+        URL url = null;
+        try
+        {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildReviewsURL(Context context, int id) {
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendPath(String.valueOf(id))
+                .appendPath(context.getString(R.string.reviews))
+                .appendQueryParameter(api, getApiKey(context))
+                .build();
+
+        URL url = null;
+        try
+        {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

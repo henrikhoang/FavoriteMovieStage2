@@ -1,4 +1,4 @@
-package com.example.henrikhoang.projectmoviestage1.utility;
+package com.example.henrikhoang.projectmoviestage1.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;

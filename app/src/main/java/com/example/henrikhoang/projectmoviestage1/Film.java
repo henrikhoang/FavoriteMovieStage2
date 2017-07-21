@@ -18,6 +18,8 @@ public class Film {
      String date;
    String overview;
     int id;
+    String[] mAuthor;
+    String[] mComment;
 
     public Film() {}
 
@@ -73,6 +75,22 @@ public class Film {
     }
 
     public void setVote(double vote) { this.vote = vote; }
+
+    public void setAuthor(String[] author) {
+        this.mAuthor = author;
+    }
+
+    public String[] getAuthor() {
+        return mAuthor;
+    }
+
+    public void setComment(String[] comment) {
+        this.mComment = comment;
+    }
+
+    public String[] getComment() {
+        return mComment;
+    }
 
 
 }

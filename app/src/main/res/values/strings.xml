@@ -17,8 +17,10 @@
     <string name="pref_sortby_value">Sort By</string>
 
     <string name="content_authority">com.example.henrikhoang.projectmoviestage1</string>
+    <string name="video_trailers">videos</string>
+    <string name="reviews">reviews</string>
 
     <!--API key-->
-    <string name="API_KEY">6712d9f6ddd870ad1a45854cde7e9e63</string>
+    <string name="API_KEY"></string>
     //INSERT YOUR API KEY HERE
 </resources>

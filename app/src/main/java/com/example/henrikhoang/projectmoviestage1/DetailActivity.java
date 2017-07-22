@@ -10,7 +10,6 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.henrikhoang.projectmoviestage1.adapter.TrailerAdapter;
 import com.example.henrikhoang.projectmoviestage1.databinding.ActivityDetailsBinding;
@@ -55,6 +54,7 @@ TrailerAdapter.TrailerAdapterOnClickHandler {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mTrailerAdapter = new TrailerAdapter(this, this);
+        mRecyclerView.setAdapter(mTrailerAdapter);
 
         int movieId = film.getId();
         BOOM = movieId;
@@ -101,12 +101,10 @@ TrailerAdapter.TrailerAdapterOnClickHandler {
 
     @Override
     public void onLoadFinished(Loader<Film> loader, Film data) {
-        try {
-            Log.d(TAG, "Review: " + data.getAuthor()[0]);
-        } catch (Exception e) {
-            e.printStackTrace();
+        mTrailerAdapter.setTrailerData(data);
+        if (null == data.getTrailerId()) {
+            return;
         }
-
     }
 
     @Override

@@ -36,7 +36,7 @@ public class TrailerAdapter extends
 
     @Override
     public TrailerAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.gmetContext();
+        Context context = viewGroup.getContext();
         int layoutIdForListTrailers = R.layout.trailers_items;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;

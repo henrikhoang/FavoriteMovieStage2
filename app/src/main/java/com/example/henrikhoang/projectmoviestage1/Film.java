@@ -20,6 +20,7 @@ public class Film {
     int id;
     String[] mAuthor;
     String[] mComment;
+    String[] mTrailerId;
 
     public Film() {}
 
@@ -92,5 +93,12 @@ public class Film {
         return mComment;
     }
 
+    public String[] getTrailerId() {
+        return mTrailerId;
+    }
+
+    public void setTrailerId(String[] id) {
+        this.mTrailerId = id;
+    }
 
 }

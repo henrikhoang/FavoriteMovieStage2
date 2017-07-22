@@ -1,4 +1,4 @@
-package com.example.henrikhoang.projectmoviestage1;
+package com.example.henrikhoang.projectmoviestage1.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.henrikhoang.projectmoviestage1.Film;
+import com.example.henrikhoang.projectmoviestage1.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

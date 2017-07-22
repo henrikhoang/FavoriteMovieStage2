@@ -53,7 +53,7 @@ public final class Network {
         return url;
     }
 
-    public static URL buildTrailerURL(Context context, int id) {
+    public static URL buildTrailersURL(Context context, int id) {
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                 .appendPath(String.valueOf(id))
                 .appendPath(context.getString(R.string.video_trailers))

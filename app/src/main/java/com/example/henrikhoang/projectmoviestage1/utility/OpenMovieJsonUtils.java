@@ -28,6 +28,7 @@ public final class OpenMovieJsonUtils {
     final static String ID = "id";
     final static String AUTHOR = "author";
     final static String CONTENT = "content";
+    final static String YOUTUBE_KEY = "key";
 
     public static List<Film> getSimpleMovieStringsFromJson(Context context, String movieJsonStr)
             throws JSONException {
@@ -61,19 +62,19 @@ public final class OpenMovieJsonUtils {
 
     }
 
-    public static Film getTrailersUrlFromJson(Context context, String movieJsonStr)
+    public static Film getReviewFromJson(Context context, String movieJsonStr)
         throws JSONException {
         JSONObject movieJson = new JSONObject(movieJsonStr);
-        JSONArray videoArray = movieJson.getJSONArray(RESULT);
+        JSONArray reviewArray = movieJson.getJSONArray(RESULT);
 
 
-        String[] authorData = new String[videoArray.length()];
-        String[] contentData = new String[videoArray.length()];
+        String[] authorData = new String[reviewArray.length()];
+        String[] contentData = new String[reviewArray.length()];
 
         Film film = new Film();
 
-        for (int i = 0; i < videoArray.length(); i++) {
-            JSONObject review = videoArray.getJSONObject(i);
+        for (int i = 0; i < reviewArray.length(); i++) {
+            JSONObject review = reviewArray.getJSONObject(i);
 
             Film tempFilm = new Film();
             String author = review.getString(AUTHOR);
@@ -85,6 +86,24 @@ public final class OpenMovieJsonUtils {
         film.setComment(contentData);
         film.setAuthor(authorData);
 
+        return film;
+    }
+
+    public static Film getTrailerFromJson(Context context, String movieJsonStr)
+        throws JSONException {
+        JSONObject movieJson = new JSONObject(movieJsonStr);
+        JSONArray videoArray = movieJson.getJSONArray(RESULT);
+
+        String[] trailerData = new String[videoArray.length()];
+        Film film = new Film();
+
+        for (int i = 0; i < videoArray.length(); i++) {
+            JSONObject trailer = videoArray.getJSONObject(i);
+            Film temp = new Film();
+            String key = trailer.getString(YOUTUBE_KEY);
+            trailerData[i] = key;
+        }
+        film.setTrailerId(trailerData);
         return film;
 
     }

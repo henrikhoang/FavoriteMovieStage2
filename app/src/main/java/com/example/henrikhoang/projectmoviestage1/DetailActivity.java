@@ -1,5 +1,7 @@
 package com.example.henrikhoang.projectmoviestage1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -20,7 +22,9 @@ import org.parceler.Parcels;
 
 import java.net.URL;
 
-public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Film> {
+public class DetailActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Film>,
+TrailerAdapter.TrailerAdapterOnClickHandler {
 
     private ActivityDetailsBinding mDetailBinding;
     private static final String TAG = DetailActivity.class.getSimpleName();
@@ -50,7 +54,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mTrailerAdapter = new TrailerAdapter(this, DetailActivity.class);
+        mTrailerAdapter = new TrailerAdapter(this, this);
 
         int movieId = film.getId();
         BOOM = movieId;
@@ -108,5 +112,15 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<Film> loader) {
 
+    }
+
+    @Override
+    public void onClick(String youtubeId) {
+        Context context = this;
+        Class desticationClass = OpenTrailerIntent.class;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setClass(context, desticationClass);
+        intent.putExtra("youtubeId", youtubeId);
+        startActivity(intent);
     }
 }

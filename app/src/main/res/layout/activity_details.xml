@@ -40,6 +40,13 @@
         android:layout_width="match_parent"
         layout="@layout/details_poster_title"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerview_trailerList">
+
+    </android.support.v7.widget.RecyclerView>
+
 
 
 </LinearLayout>

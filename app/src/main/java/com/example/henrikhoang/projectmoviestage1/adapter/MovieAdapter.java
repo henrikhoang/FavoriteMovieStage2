@@ -60,7 +60,8 @@ public class MovieAdapter
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
         final Film film = mFilms.get(position);
         String movieBeingSelectedPoster = film.getPosterPath();
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster)
+                .into(holder.mMovieImageView);
 
 
     }

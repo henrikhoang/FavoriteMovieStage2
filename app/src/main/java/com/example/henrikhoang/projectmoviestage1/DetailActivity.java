@@ -6,8 +6,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.example.henrikhoang.projectmoviestage1.adapter.TrailerAdapter;
 import com.example.henrikhoang.projectmoviestage1.databinding.ActivityDetailsBinding;
 import com.example.henrikhoang.projectmoviestage1.utility.Network;
 import com.example.henrikhoang.projectmoviestage1.utility.OpenMovieJsonUtils;
@@ -21,6 +24,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private ActivityDetailsBinding mDetailBinding;
     private static final String TAG = DetailActivity.class.getSimpleName();
+
+    private RecyclerView mRecyclerView;
+    private TrailerAdapter mTrailerAdapter;
 
     public static int BOOM = 0;
     private static final int REVIEW_LOADER_ID = 100;
@@ -39,11 +45,18 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         Picasso.with(this).load("http://image.tmdb.org/t/p/w500"+ film.getPosterPath())
                 .into(mDetailBinding.primaryMovieInfo.ivMoviePoster);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_trailerList);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mTrailerAdapter = new TrailerAdapter(this, DetailActivity.class);
 
         int movieId = film.getId();
         BOOM = movieId;
 
         int loaderId = REVIEW_LOADER_ID;
+
 
         LoaderManager.LoaderCallbacks<Film> callback = DetailActivity.this;
         Bundle bunderForLoader = null;

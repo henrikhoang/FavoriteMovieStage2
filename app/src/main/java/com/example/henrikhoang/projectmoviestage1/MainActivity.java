@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.henrikhoang.projectmoviestage1.Settings.SettingsActivity;
 import com.example.henrikhoang.projectmoviestage1.adapter.MovieAdapter;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements
     public static final String TAG = MainActivity.class.getSimpleName();
 
 
-    private TextView mErrorTextView;
     private RecyclerView mRecyclerView;
     private ProgressBar mLoadingIndicator;
     private MovieAdapter mMovieAdapter;

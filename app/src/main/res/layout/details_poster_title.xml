@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   >
+<android.support.constraint.ConstraintLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_movie_poster"
+        android:layout_width="170dp"
+        android:layout_height="243dp"
+        tools:src="@mipmap/ic_launcher"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="91dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_movie_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="SPIDER MAN: HOME COMING"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_movie_poster"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@color/colorPrimary"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2016"
+        tools:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_movie_poster"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_movie_poster"
+        android:layout_marginTop="7dp"
+        app:layout_constraintHorizontal_bias="0.239" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="7.7"
+        tools:textSize="20sp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_release_date" />
+
+    <Button
+        android:id="@+id/button_fav"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Mark as Favorite"
+        app:layout_constraintLeft_toRightOf="@+id/iv_movie_poster"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_movie_poster"
+        android:layout_marginBottom="52dp" />
+
+
+</android.support.constraint.ConstraintLayout>
+</layout>

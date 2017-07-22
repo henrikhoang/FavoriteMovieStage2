@@ -73,7 +73,7 @@ public class MovieAdapter
 
     }
 
-    public void setWeatherData(List<Film> films) {
+    public void setMovieData(List<Film> films) {
         mFilms = films;
         notifyDataSetChanged();
     }

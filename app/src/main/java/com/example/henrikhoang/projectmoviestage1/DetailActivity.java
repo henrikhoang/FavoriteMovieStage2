@@ -87,9 +87,9 @@ TrailerAdapter.TrailerAdapterOnClickHandler {
             @Override
             public Film loadInBackground() {
                 try {
-                    URL reviewRequestURL = Network.buildReviewsURL(DetailActivity.this, BOOM);
+                    URL reviewRequestURL = Network.buildTrailersURL(DetailActivity.this, BOOM);
                     String jsonMovieResponse = Network.getResponseFromHttpUrl(reviewRequestURL);
-                    Film film = OpenMovieJsonUtils.getReviewFromJson(DetailActivity.this, jsonMovieResponse);
+                    Film film = OpenMovieJsonUtils.getTrailerFromJson(DetailActivity.this, jsonMovieResponse);
                     return film;
                 } catch (Exception e) {
                     e.printStackTrace();

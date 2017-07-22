@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoadFinished(Loader<List<Film>> loader, List<Film> data) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        mMovieAdapter.setWeatherData(data);
+        mMovieAdapter.setMovieData(data);
         if (null == data) {
             return;
         } else { showMovieDataView(); }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void invalidateData() { mMovieAdapter.setWeatherData(null);}
+    private void invalidateData() { mMovieAdapter.setMovieData(null);}
 
     private void showMovieDataView() {
         mLoadingIndicator.setVisibility(View.INVISIBLE);

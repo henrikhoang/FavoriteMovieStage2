@@ -36,7 +36,7 @@ public class TrailerAdapter extends
 
     @Override
     public TrailerAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
+        Context context = viewGroup.gmetContext();
         int layoutIdForListTrailers = R.layout.trailers_items;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
@@ -49,6 +49,12 @@ public class TrailerAdapter extends
     public void onBindViewHolder(TrailerAdapterViewHolder holder, int position) {
         int trailerNumber = position + 1;
         holder.mTrailerNumberTextView.setText("Trailer " + String.valueOf(trailerNumber));
+    }
+
+
+    public void setTrailerData(Film film) {
+        mFilm = film;
+        notifyDataSetChanged();
     }
 
 

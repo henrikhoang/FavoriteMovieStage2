@@ -3,6 +3,7 @@ package com.example.henrikhoang.projectmoviestage1.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ import com.example.henrikhoang.projectmoviestage1.R;
 public class TrailerAdapter extends
         RecyclerView.Adapter<TrailerAdapter.TrailerAdapterViewHolder> {
 
+    public static final String TAG = TrailerAdapter.class.getSimpleName();
     private final Context mContext;
     private final TrailerAdapterOnClickHandler mClickHandler;
     private Film mFilm;
@@ -75,13 +77,16 @@ public class TrailerAdapter extends
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             String youtubeId = mFilm.getTrailerId()[adapterPosition];
+
+            Log.d(TAG, "LINK IS :" + youtubeId);
+
             mClickHandler.onClick(youtubeId);
         }
     }
 
     @Override
     public int getItemCount() {
-        if (null == mFilm.getTrailerId()) return 0;
+        if (0 == mFilm.getTrailerId().length) return 0;
         return mFilm.getTrailerId().length;
     }
 }

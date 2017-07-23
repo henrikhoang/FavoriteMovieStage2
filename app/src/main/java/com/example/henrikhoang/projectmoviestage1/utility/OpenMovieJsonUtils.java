@@ -29,6 +29,7 @@ public final class OpenMovieJsonUtils {
     final static String AUTHOR = "author";
     final static String CONTENT = "content";
     final static String YOUTUBE_KEY = "key";
+    final static String URL = "url";
 
     public static List<Film> getSimpleMovieStringsFromJson(Context context, String movieJsonStr)
             throws JSONException {
@@ -70,21 +71,23 @@ public final class OpenMovieJsonUtils {
 
         String[] authorData = new String[reviewArray.length()];
         String[] contentData = new String[reviewArray.length()];
-
+        String[] urlData = new String[reviewArray.length()];
         Film film = new Film();
 
         for (int i = 0; i < reviewArray.length(); i++) {
             JSONObject review = reviewArray.getJSONObject(i);
 
-            Film tempFilm = new Film();
             String author = review.getString(AUTHOR);
             String content = review.getString(CONTENT);
+            String url = review.getString(URL);
             authorData[i] = author;
             contentData[i] = content;
+            urlData[i] = url;
 
         }
         film.setComment(contentData);
         film.setAuthor(authorData);
+        film.setUrlReview(urlData);
 
         return film;
     }
@@ -99,7 +102,6 @@ public final class OpenMovieJsonUtils {
 
         for (int i = 0; i < videoArray.length(); i++) {
             JSONObject trailer = videoArray.getJSONObject(i);
-            Film temp = new Film();
             String key = trailer.getString(YOUTUBE_KEY);
             trailerData[i] = key;
         }

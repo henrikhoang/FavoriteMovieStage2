@@ -22,5 +22,7 @@
 
     <!--API key-->
     <string name="API_KEY">6712d9f6ddd870ad1a45854cde7e9e63</string>
+    <string name="trailer_label">Trailers</string>
+    <string name="tv_reviews_label">Reviews</string>
     //INSERT YOUR API KEY HERE
 </resources>

@@ -21,6 +21,7 @@ public class Film {
     String[] mAuthor;
     String[] mComment;
     String[] mTrailerId;
+    String[] mUrl;
 
     public Film() {}
 
@@ -100,5 +101,9 @@ public class Film {
     public void setTrailerId(String[] id) {
         this.mTrailerId = id;
     }
+
+    public void setUrlReview(String[] url) { this.mUrl = url;}
+
+    public String[] getUrlReview() { return mUrl;}
 
 }

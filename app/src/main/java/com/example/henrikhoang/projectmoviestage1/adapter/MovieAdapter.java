@@ -1,7 +1,6 @@
 package com.example.henrikhoang.projectmoviestage1.adapter;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,11 +30,8 @@ public class MovieAdapter
 
     public interface MovieAdapterOnClickHandler {
         void onClick (Film selectedMovieId);
-
-
     }
 
-    private Cursor mCursor;
 
     public MovieAdapter(MovieAdapterOnClickHandler clickHandler,@NonNull Context ctx) {
         mClickHandler = clickHandler;
@@ -60,7 +56,8 @@ public class MovieAdapter
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
         final Film film = mFilms.get(position);
         String movieBeingSelectedPoster = film.getPosterPath();
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster).into(holder.mMovieImageView);
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + movieBeingSelectedPoster)
+                .into(holder.mMovieImageView);
 
 
     }
@@ -72,7 +69,7 @@ public class MovieAdapter
 
     }
 
-    public void setWeatherData(List<Film> films) {
+    public void setMovieData(List<Film> films) {
         mFilms = films;
         notifyDataSetChanged();
     }
@@ -92,7 +89,6 @@ public class MovieAdapter
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             Film film = mFilms.get(adapterPosition);
-
             mClickHandler.onClick(film);
         }
     }

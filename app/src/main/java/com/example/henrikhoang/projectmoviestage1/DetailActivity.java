@@ -6,8 +6,13 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
+import com.example.henrikhoang.projectmoviestage1.adapter.ReviewAdapter;
+import com.example.henrikhoang.projectmoviestage1.adapter.TrailerAdapter;
 import com.example.henrikhoang.projectmoviestage1.databinding.ActivityDetailsBinding;
 import com.example.henrikhoang.projectmoviestage1.utility.Network;
 import com.example.henrikhoang.projectmoviestage1.utility.OpenMovieJsonUtils;
@@ -17,13 +22,23 @@ import org.parceler.Parcels;
 
 import java.net.URL;
 
-public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Film> {
+public class DetailActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Film>,
+TrailerAdapter.TrailerAdapterOnClickHandler,
+ReviewAdapter.ReviewAdapterOnClickHandler {
 
     private ActivityDetailsBinding mDetailBinding;
     private static final String TAG = DetailActivity.class.getSimpleName();
 
-    public static int BOOM = 0;
-    private static final int REVIEW_LOADER_ID = 100;
+    private RecyclerView mTrailersRecyclerView;
+    private RecyclerView mReviewsRecyclerView;
+
+    private ReviewAdapter mReviewAdapter;
+    private TrailerAdapter mTrailerAdapter;
+
+    public static int MOVIE_ID = 0;
+    private static final int TRAILERS_LOADER_ID = 100;
+    private static final int REVIEWS_LOADER_ID = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +54,29 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         Picasso.with(this).load("http://image.tmdb.org/t/p/w500"+ film.getPosterPath())
                 .into(mDetailBinding.primaryMovieInfo.ivMoviePoster);
 
+        mTrailersRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_trailerList);
+        mReviewsRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_reviewList);
 
-        int movieId = film.getId();
-        BOOM = movieId;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mTrailersRecyclerView.setLayoutManager(linearLayoutManager);
+        mTrailersRecyclerView.setHasFixedSize(true);
+        mTrailerAdapter = new TrailerAdapter(this, this);
+        mTrailersRecyclerView.setAdapter(mTrailerAdapter);
 
-        int loaderId = REVIEW_LOADER_ID;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mReviewsRecyclerView.setLayoutManager(layoutManager);
+        mReviewsRecyclerView.setHasFixedSize(false);
+        mReviewAdapter = new ReviewAdapter(this);
+        mReviewsRecyclerView.setAdapter(mReviewAdapter);
+
+
+        MOVIE_ID = film.getId();
+
 
         LoaderManager.LoaderCallbacks<Film> callback = DetailActivity.this;
         Bundle bunderForLoader = null;
-        getSupportLoaderManager().initLoader(loaderId, bunderForLoader, callback);
+        getSupportLoaderManager().initLoader(TRAILERS_LOADER_ID, bunderForLoader, callback);
+        getSupportLoaderManager().initLoader(REVIEWS_LOADER_ID, bunderForLoader, callback);
 
 
     }
@@ -55,45 +84,106 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public Loader<Film> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<Film>(this) {
 
-            Film film = null;
-            @Override
-            protected void onStartLoading() {
-                if (film != null) {
-                    deliverResult(film);
-                } else {
-                    forceLoad();
-                }
+        switch (id) {
+            case TRAILERS_LOADER_ID: {
+                return new AsyncTaskLoader<Film>(this) {
+
+                    Film film = null;
+
+                    @Override
+                    protected void onStartLoading() {
+                        if (film != null) {
+                            deliverResult(film);
+                        } else {
+                            forceLoad();
+                        }
+                    }
+
+                    @Override
+                    public Film loadInBackground() {
+                        try {
+                            URL trailerRequestURL = Network.buildTrailersURL(DetailActivity.this, MOVIE_ID);
+
+                            String jsonMovieResponse = Network.getResponseFromHttpUrl(trailerRequestURL);
+
+                            Film film = OpenMovieJsonUtils.getTrailerFromJson(DetailActivity.this, jsonMovieResponse);
+
+                            mTrailerAdapter.setTrailerData(film);
+                            mTrailerAdapter.notifyDataSetChanged();
+
+                            return film;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
             }
 
-            @Override
-            public Film loadInBackground() {
-                try {
-                    URL reviewRequestURL = Network.buildReviewsURL(DetailActivity.this, BOOM);
-                    String jsonMovieResponse = Network.getResponseFromHttpUrl(reviewRequestURL);
-                    Film film = OpenMovieJsonUtils.getReviewFromJson(DetailActivity.this, jsonMovieResponse);
-                    return film;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
+            case REVIEWS_LOADER_ID: {
+                return new AsyncTaskLoader<Film>(this) {
+
+                    Film film = null;
+
+                    @Override
+                    protected void onStartLoading() {
+                        if (film != null) {
+                            deliverResult(film);
+                        } else {
+                            forceLoad();
+                        }
+                    }
+
+                    @Override
+                    public Film loadInBackground() {
+                        try {
+                            URL reviewRequestURL = Network.buildReviewsURL(DetailActivity.this, MOVIE_ID);
+                            String jsonReviewResponse = Network.getResponseFromHttpUrl(reviewRequestURL);
+                            Film review = OpenMovieJsonUtils.getReviewFromJson(DetailActivity.this, jsonReviewResponse);
+
+                            mReviewAdapter.setReviewData(review);
+                            mReviewAdapter.notifyDataSetChanged();
+                            return review;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
             }
-        };
+
+            default:
+                return null;
+        }
     }
 
     @Override
     public void onLoadFinished(Loader<Film> loader, Film data) {
+
         try {
-            Log.d(TAG, "Review: " + data.getAuthor()[0]);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (data.getTrailerId() == null) {
+            mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
+        }
+        if (data.getAuthor() == null) {
+            mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);}
+
+        } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
 
-    }
 
     @Override
     public void onLoaderReset(Loader<Film> loader) {
 
     }
+
+    @Override
+    public void onClick(String youtubeId) {
+        Log.d(TAG, "YouTube id: " + youtubeId);
+
+    }
+
+
 }

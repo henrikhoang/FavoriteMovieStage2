@@ -36,8 +36,6 @@
             android:authorities="com.example.henrikhoang.projectmoviestage1"
             android:exported="false" />
 
-        <activity android:name=".OpenTrailerActivity"
-            android:parentActivityName=".DetailActivity"/>
 
     </application>
 

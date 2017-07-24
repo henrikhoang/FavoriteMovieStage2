@@ -68,8 +68,13 @@ public class ReviewAdapter extends
 
     @Override
     public int getItemCount() {
-        if (0 == mFilm.getAuthor().length) return 0;
-        return mFilm.getAuthor().length;
+        try {
+            if (0 == mFilm.getAuthor().length) return 0;
+            return mFilm.getAuthor().length;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
 

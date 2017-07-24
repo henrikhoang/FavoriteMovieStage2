@@ -24,5 +24,7 @@
     <string name="API_KEY">6712d9f6ddd870ad1a45854cde7e9e63</string>
     <string name="trailer_label">Trailers</string>
     <string name="tv_reviews_label">Reviews</string>
+    <string name="no_trailer">No Trailers Available</string>
+    <string name="no_reviews">No Reviews Available</string>
     //INSERT YOUR API KEY HERE
 </resources>

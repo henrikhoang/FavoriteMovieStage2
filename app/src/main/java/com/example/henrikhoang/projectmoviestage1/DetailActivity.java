@@ -1,6 +1,5 @@
 package com.example.henrikhoang.projectmoviestage1;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -10,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.example.henrikhoang.projectmoviestage1.adapter.ReviewAdapter;
 import com.example.henrikhoang.projectmoviestage1.adapter.TrailerAdapter;
@@ -65,7 +65,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mReviewsRecyclerView.setLayoutManager(layoutManager);
-        mReviewsRecyclerView.setHasFixedSize(true);
+        mReviewsRecyclerView.setHasFixedSize(false);
         mReviewAdapter = new ReviewAdapter(this);
         mReviewsRecyclerView.setAdapter(mReviewAdapter);
 
@@ -152,7 +152,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                     }
                 };
             }
-            
+
             default:
                 return null;
         }
@@ -161,10 +161,18 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
     @Override
     public void onLoadFinished(Loader<Film> loader, Film data) {
 
-        if (null == data.getTrailerId() & data.getAuthor() == null) {
-            return;
+        try {
+        if (data.getTrailerId() == null) {
+            mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
         }
-    }
+        if (data.getAuthor() == null) {
+            mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);}
+
+        } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     @Override
     public void onLoaderReset(Loader<Film> loader) {
@@ -174,11 +182,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
     @Override
     public void onClick(String youtubeId) {
         Log.d(TAG, "YouTube id: " + youtubeId);
-        Class destinationClass = OpenTrailerActivity.class;
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setClass(this, destinationClass);
-        intent.putExtra("youtubeId", youtubeId);
-        startActivity(intent);
+
     }
 
 

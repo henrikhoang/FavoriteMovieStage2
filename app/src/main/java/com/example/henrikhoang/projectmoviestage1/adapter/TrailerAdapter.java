@@ -86,7 +86,12 @@ public class TrailerAdapter extends
 
     @Override
     public int getItemCount() {
-        if (0 == mFilm.getTrailerId().length) return 0;
-        return mFilm.getTrailerId().length;
+        try {
+            if (0 == mFilm.getTrailerId().length) return 0;
+            return mFilm.getTrailerId().length;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

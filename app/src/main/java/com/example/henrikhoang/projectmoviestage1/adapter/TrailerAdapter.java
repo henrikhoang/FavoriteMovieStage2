@@ -3,7 +3,6 @@ package com.example.henrikhoang.projectmoviestage1.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,8 +48,9 @@ public class TrailerAdapter extends
 
     @Override
     public void onBindViewHolder(TrailerAdapterViewHolder holder, int position) {
-        int trailerNumber = position + 1;
-        holder.mTrailerNumberTextView.setText("Trailer " + String.valueOf(trailerNumber));
+        int trailerNumber = position;
+        holder.mTrailerNumberTextView.setText("Trailer " + mFilm.getTrailerId()[trailerNumber]);
+
     }
 
 
@@ -59,6 +59,19 @@ public class TrailerAdapter extends
         notifyDataSetChanged();
     }
 
+
+
+
+    @Override
+    public int getItemCount() {
+        try {
+            if (null == mFilm.getTrailerId()) return 0;
+            return mFilm.getTrailerId().length;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     class TrailerAdapterViewHolder extends RecyclerView.ViewHolder implements
             OnClickListener {
@@ -77,21 +90,7 @@ public class TrailerAdapter extends
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             String youtubeId = mFilm.getTrailerId()[adapterPosition];
-
-            Log.d(TAG, "LINK IS :" + youtubeId);
-
             mClickHandler.onClick(youtubeId);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        try {
-            if (0 == mFilm.getTrailerId().length) return 0;
-            return mFilm.getTrailerId().length;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 }

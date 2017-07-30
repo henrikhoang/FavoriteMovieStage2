@@ -1,8 +1,8 @@
 package com.example.henrikhoang.projectmoviestage1;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -214,9 +214,11 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
     @Override
     public void onClick(String youtubeId) {
-        Context context = this;
+
         Log.d(TAG, "YouTube id: " + youtubeId);
         Intent watchIntent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse("https://www.youtube.com/watch?v=" + youtubeId);
+        watchIntent.setData(uri);
         String title = "Choose where to play the video";
 
         Intent chooser = Intent.createChooser(watchIntent, title);

@@ -143,8 +143,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(Film film) {
         Context context = this;
         Class destinationClass = DetailActivity.class;
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setClass(context, destinationClass);
+        Intent intent = new Intent(context, destinationClass);
         intent.putExtra("film", Parcels.wrap(film));
         startActivity(intent);
 

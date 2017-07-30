@@ -1,6 +1,8 @@
 package com.example.henrikhoang.projectmoviestage1;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -21,6 +23,8 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import java.net.URL;
+
+import static android.view.View.GONE;
 
 public class DetailActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Film>,
@@ -69,14 +73,13 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
         mReviewAdapter = new ReviewAdapter(this);
         mReviewsRecyclerView.setAdapter(mReviewAdapter);
 
-
         MOVIE_ID = film.getId();
 
 
         LoaderManager.LoaderCallbacks<Film> callback = DetailActivity.this;
-        Bundle bunderForLoader = null;
-        getSupportLoaderManager().initLoader(TRAILERS_LOADER_ID, bunderForLoader, callback);
-        getSupportLoaderManager().initLoader(REVIEWS_LOADER_ID, bunderForLoader, callback);
+        Bundle bundleForLoader = null;
+        getSupportLoaderManager().initLoader(TRAILERS_LOADER_ID, bundleForLoader, callback);
+        getSupportLoaderManager().initLoader(REVIEWS_LOADER_ID, bundleForLoader, callback);
 
 
     }
@@ -93,6 +96,9 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
                     @Override
                     protected void onStartLoading() {
+
+                        mDetailBinding.tvNoTrailer.setVisibility(GONE);
+
                         if (film != null) {
                             deliverResult(film);
                         } else {
@@ -108,9 +114,14 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                             String jsonMovieResponse = Network.getResponseFromHttpUrl(trailerRequestURL);
 
                             Film film = OpenMovieJsonUtils.getTrailerFromJson(DetailActivity.this, jsonMovieResponse);
-
                             mTrailerAdapter.setTrailerData(film);
-                            mTrailerAdapter.notifyDataSetChanged();
+
+                            if (film.getTrailerId() == null) {
+                                mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
+                            }
+
+
+
 
                             return film;
                         } catch (Exception e) {
@@ -128,6 +139,9 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
                     @Override
                     protected void onStartLoading() {
+
+                        mDetailBinding.tvNoReview.setVisibility(GONE);
+
                         if (film != null) {
                             deliverResult(film);
                         } else {
@@ -143,7 +157,13 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                             Film review = OpenMovieJsonUtils.getReviewFromJson(DetailActivity.this, jsonReviewResponse);
 
                             mReviewAdapter.setReviewData(review);
-                            mReviewAdapter.notifyDataSetChanged();
+
+                            if (review.getAuthor() == null) {
+                                mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);
+                            }
+
+
+
                             return review;
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -161,16 +181,29 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
     @Override
     public void onLoadFinished(Loader<Film> loader, Film data) {
 
-        try {
-        if (data.getTrailerId() == null) {
-            mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
-        }
-        if (data.getAuthor() == null) {
-            mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);}
-
-        } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
+//        try {
+//            if (data.getTrailerId() == null) {
+//                mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
+//
+//                Log.d(TAG,  "DEBUGGER: " + data.getTrailerId().length);
+//
+//            }
+//            if (data.getAuthor() == null) {
+//                mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);
+//
+//                Log.d(TAG, "DEBUGGER: " + data.getAuthor().length);
+//
+//            } else {
+//                mDetailBinding.tvNoReview.setVisibility(GONE);
+//                mDetailBinding.tvNoTrailer.setVisibility(GONE);
+//
+//                Log.d(TAG, "DEBUGGER: " + data.getTrailerId().length + "####" + data.getAuthor().length);
+//
+//            }
+//
+//        } catch (NullPointerException e) {
+//                e.printStackTrace();
+//            }
         }
 
 
@@ -181,9 +214,24 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
     @Override
     public void onClick(String youtubeId) {
-        Log.d(TAG, "YouTube id: " + youtubeId);
 
+        Log.d(TAG, "YouTube id: " + youtubeId);
+        Intent watchIntent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse("https://www.youtube.com/watch?v=" + youtubeId);
+        watchIntent.setData(uri);
+        String title = "Choose where to play the video";
+
+        Intent chooser = Intent.createChooser(watchIntent, title);
+
+
+        if (watchIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(chooser);
+        }
     }
+
+
+
+
 
 
 }

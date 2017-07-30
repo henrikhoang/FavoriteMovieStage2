@@ -41,11 +41,11 @@ public class ReviewAdapter extends
 
     @Override
     public void onBindViewHolder(ReviewAdapter.ReviewAdapterViewHolder holder, int position) {
-        String author = mFilm.getAuthor()[position];
-        String comment = mFilm.getComment()[position];
 
-        holder.mAuthorTextView.setText(author);
-        holder.mCommentTextView.setText(comment);
+              String author = mFilm.getAuthor()[position];
+              holder.mAuthorTextView.setText(author);
+              String comment = mFilm.getComment()[position];
+              holder.mCommentTextView.setText(comment);
     }
 
     public void setReviewData(Film film) {

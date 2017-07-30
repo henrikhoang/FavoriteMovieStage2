@@ -29,7 +29,9 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
 
-        <activity android:name=".Settings.SettingsActivity" />
+        <activity android:name=".Settings.SettingsActivity" >
+        </activity>
+
 
         <provider
             android:name=".data.MovieProvider"

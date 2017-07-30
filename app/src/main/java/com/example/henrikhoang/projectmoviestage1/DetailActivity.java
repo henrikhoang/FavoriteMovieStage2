@@ -221,7 +221,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
         Intent chooser = Intent.createChooser(watchIntent, title);
 
-// Verify the original intent will resolve to at least one activity
+
         if (watchIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(chooser);
         }

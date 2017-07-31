@@ -1,5 +1,6 @@
 package com.example.henrikhoang.projectmoviestage1;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -12,9 +13,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.henrikhoang.projectmoviestage1.adapter.ReviewAdapter;
 import com.example.henrikhoang.projectmoviestage1.adapter.TrailerAdapter;
+import com.example.henrikhoang.projectmoviestage1.data.MovieContract;
 import com.example.henrikhoang.projectmoviestage1.databinding.ActivityDetailsBinding;
 import com.example.henrikhoang.projectmoviestage1.utility.Network;
 import com.example.henrikhoang.projectmoviestage1.utility.OpenMovieJsonUtils;
@@ -51,7 +54,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
         mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_details);
 
 
-        Film film = Parcels.unwrap(getIntent().getParcelableExtra("film"));
+        final Film film = Parcels.unwrap(getIntent().getParcelableExtra("film"));
         mDetailBinding.primaryMovieInfo.tvMovieTitle.setText(film.getTitle());
         mDetailBinding.primaryMovieInfo.tvRating.setText(String.valueOf(film.getVote()));
         mDetailBinding.primaryMovieInfo.tvReleaseDate.setText(film.getDate());
@@ -81,6 +84,20 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
         getSupportLoaderManager().initLoader(TRAILERS_LOADER_ID, bundleForLoader, callback);
         getSupportLoaderManager().initLoader(REVIEWS_LOADER_ID, bundleForLoader, callback);
 
+        mDetailBinding.primaryMovieInfo.buttonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = film.getTitle();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(MovieContract.MovieEntry.COLUMN_TITLE, title);
+                Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
+
+                if (uri != null) {
+                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                }
+                finish();
+            }
+        });
 
     }
 
@@ -114,13 +131,6 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                             String jsonMovieResponse = Network.getResponseFromHttpUrl(trailerRequestURL);
 
                             Film film = OpenMovieJsonUtils.getTrailerFromJson(DetailActivity.this, jsonMovieResponse);
-                            mTrailerAdapter.setTrailerData(film);
-
-                            if (film.getTrailerId() == null) {
-                                mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
-                            }
-
-
 
 
                             return film;
@@ -156,14 +166,6 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                             String jsonReviewResponse = Network.getResponseFromHttpUrl(reviewRequestURL);
                             Film review = OpenMovieJsonUtils.getReviewFromJson(DetailActivity.this, jsonReviewResponse);
 
-                            mReviewAdapter.setReviewData(review);
-
-                            if (review.getAuthor() == null) {
-                                mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);
-                            }
-
-
-
                             return review;
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -179,31 +181,16 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
     }
 
     @Override
-    public void onLoadFinished(Loader<Film> loader, Film data) {
+    public void onLoadFinished(Loader<Film> loader, Film film) {
 
-//        try {
-//            if (data.getTrailerId() == null) {
-//                mDetailBinding.tvNoTrailer.setVisibility(View.VISIBLE);
-//
-//                Log.d(TAG,  "DEBUGGER: " + data.getTrailerId().length);
-//
-//            }
-//            if (data.getAuthor() == null) {
-//                mDetailBinding.tvNoReview.setVisibility(View.VISIBLE);
-//
-//                Log.d(TAG, "DEBUGGER: " + data.getAuthor().length);
-//
-//            } else {
-//                mDetailBinding.tvNoReview.setVisibility(GONE);
-//                mDetailBinding.tvNoTrailer.setVisibility(GONE);
-//
-//                Log.d(TAG, "DEBUGGER: " + data.getTrailerId().length + "####" + data.getAuthor().length);
-//
-//            }
-//
-//        } catch (NullPointerException e) {
-//                e.printStackTrace();
-//            }
+        if (film.getAuthor() != null) {
+            mReviewAdapter.setReviewData(film);
+        }
+
+        if (film.getTrailerId() != null) {
+            mTrailerAdapter.setTrailerData(film);
+        }
+
         }
 
 
@@ -228,10 +215,4 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
             startActivity(chooser);
         }
     }
-
-
-
-
-
-
 }

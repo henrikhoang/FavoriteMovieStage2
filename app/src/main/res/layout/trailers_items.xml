@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+<!--<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:tools="http://schemas.android.com/tools">-->
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -13,17 +17,19 @@
 
         <ImageButton
             android:id="@+id/play_button_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@android:drawable/ic_media_play"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/trailer_number_tv"
-            android:layout_width="325dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             tools:text= "Trailers 1"
             android:paddingTop="16dp"
             android:paddingLeft="16dp"
-            android:textAlignment="viewStart"/>
+            android:textAlignment="viewStart"
+            android:layout_weight="4"/>
     </LinearLayout>
-</HorizontalScrollView>
+<!--</HorizontalScrollView>-->

@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 
 import com.example.henrikhoang.projectmoviestage1.Settings.SettingsActivity;
 import com.example.henrikhoang.projectmoviestage1.adapter.MovieAdapter;
-import com.example.henrikhoang.projectmoviestage1.data.MoviePreferences;
+import com.example.henrikhoang.projectmoviestage1.Settings.MoviePreferences;
 import com.example.henrikhoang.projectmoviestage1.utility.Network;
 import com.example.henrikhoang.projectmoviestage1.utility.OpenMovieJsonUtils;
 

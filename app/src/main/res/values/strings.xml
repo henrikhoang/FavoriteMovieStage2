@@ -28,5 +28,6 @@
     <string name="tv_reviews_label">Reviews</string>
     <string name="no_trailer">No Trailers Available</string>
     <string name="no_reviews">No Reviews Available</string>
+    <string name="favourite_button">Mark as Favorite</string>
 
 </resources>

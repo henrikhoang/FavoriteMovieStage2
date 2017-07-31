@@ -83,7 +83,7 @@ public class TrailerAdapter extends
             super(view);
             mPlayButtonImageView = (ImageView) view.findViewById(R.id.play_button_view);
             mTrailerNumberTextView = (TextView) view.findViewById(R.id.trailer_number_tv);
-            view.setOnClickListener(this);
+            mPlayButtonImageView.setOnClickListener(this);
         }
 
         @Override

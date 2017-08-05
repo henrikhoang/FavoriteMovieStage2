@@ -29,16 +29,15 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
 
-        <activity android:name=".Settings.SettingsActivity" >
-        </activity>
-
+        <activity android:name=".Settings.SettingsActivity" />
 
         <provider
             android:name=".data.MovieProvider"
             android:authorities="com.example.henrikhoang.projectmoviestage1"
             android:exported="false" />
 
-
+        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".FavMovieDetailActivity"></activity>
     </application>
 
 </manifest>

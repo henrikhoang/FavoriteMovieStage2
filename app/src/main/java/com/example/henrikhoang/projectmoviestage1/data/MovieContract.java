@@ -26,11 +26,5 @@ public class MovieContract {
         public static final String COLUMN_POSTER = "poster_path";
         public static final String COLUMN_MOVIE_ID = "id";
 
-        public static Uri buildMovieUriWithId(int id) {
-            return CONTENT_URI.buildUpon()
-                    .appendPath(Integer.toString(id))
-                    .build();
-        }
-
     }
 }

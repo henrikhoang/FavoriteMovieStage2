@@ -58,6 +58,8 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
         mDetailBinding.primaryMovieInfo.tvMovieTitle.setText(film.getTitle());
         mDetailBinding.primaryMovieInfo.tvRating.setText(String.valueOf(film.getVote()));
         mDetailBinding.primaryMovieInfo.tvReleaseDate.setText(film.getDate());
+        mDetailBinding.primaryMovieInfo.tvOverview.setText(film.getOverview());
+
         Picasso.with(this).load("http://image.tmdb.org/t/p/w500"+ film.getPosterPath())
                 .into(mDetailBinding.primaryMovieInfo.ivMoviePoster);
 
@@ -88,8 +90,22 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
             @Override
             public void onClick(View v) {
                 String title = film.getTitle();
+                String date = film.getDate();
+                String posterPath = film.getPosterPath();
+
+                String overview = film.getOverview();
+                int filmId = film.getId();
+                double vote = film.getVote();
+
                 ContentValues contentValues = new ContentValues();
+
                 contentValues.put(MovieContract.MovieEntry.COLUMN_TITLE, title);
+                contentValues.put(MovieContract.MovieEntry.COLUMN_OVERVIEW, overview);
+                contentValues.put(MovieContract.MovieEntry.COLUMN_RELEASE_DATE, date);
+                contentValues.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID, filmId);
+                contentValues.put(MovieContract.MovieEntry.COLUMN_POSTER, posterPath);
+                contentValues.put(MovieContract.MovieEntry.COLUMN_VOTE, vote);
+
                 Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
 
                 if (uri != null) {

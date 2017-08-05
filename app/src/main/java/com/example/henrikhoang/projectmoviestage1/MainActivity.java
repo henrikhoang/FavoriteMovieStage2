@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -193,6 +193,10 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.action_settings:
                 Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
                 startActivity(startSettingsActivity);
+
+            case R.id.action_favorite:
+                Intent startFavoriteList = new Intent(this, FavoriteActivity.class);
+                startActivity(startFavoriteList);
 
             default:
                 return super.onOptionsItemSelected(item);

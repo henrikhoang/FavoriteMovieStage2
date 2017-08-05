@@ -109,7 +109,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                 Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
 
                 if (uri != null) {
-                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), title + " has been added to your Favorite", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             }

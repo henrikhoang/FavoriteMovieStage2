@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements
     private MovieAdapter mMovieAdapter;
     private static final int MOVIE_LOADER_ID = 17;
 
-    private Context mContext;
 
     private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
 
@@ -193,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.action_settings:
                 Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
                 startActivity(startSettingsActivity);
+
+            case R.id.action_favorite:
+                Intent startFavoriteList = new Intent(this, FavoriteActivity.class);
+                startActivity(startFavoriteList);
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -47,20 +47,7 @@ public class MovieProvider extends ContentProvider {
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor cursor;
         switch (sUriMatcher.match(uri)) {
-            case CODE_MOVIE_DETAIL: {
-                String idForMovie = uri.getLastPathSegment();
-                String[] selectionArguments = new String[]{idForMovie};
 
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        MovieContract.MovieEntry.TABLE_NAME,
-                        projection,
-                        MovieContract.MovieEntry.COLUMN_MOVIE_ID + " = ? ",
-                        selectionArguments,
-                        null,
-                        null,
-                        sortOrder);
-                break;
-            }
             case CODE_MOVIE: {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         MovieContract.MovieEntry.TABLE_NAME,
@@ -74,7 +61,7 @@ public class MovieProvider extends ContentProvider {
             }
 
             default:
-                throw new UnsupportedOperationException("Unknow uri: " + uri);
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;

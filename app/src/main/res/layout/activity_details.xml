@@ -4,7 +4,7 @@
     <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="#96D8AC">
+        android:background="@color/colorPrimaryDark">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,24 +20,21 @@
             android:id="@+id/tv_trailers_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/trailer_label" />
+            android:padding="@dimen/normal"
+            android:text="@string/trailer_label"
+            android:textColor="@color/colorText"
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/trailer_size"
+            android:textAllCaps="true"
+            android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tv_no_trailer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/no_trailer"
-            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingTop="@dimen/normal"
+            android:paddingStart="@dimen/small"
+            android:paddingEnd="@dimen/small"
             app:reverseLayout="true"
             android:id="@+id/recyclerview_trailerList">
 
@@ -47,24 +44,21 @@
             android:id="@+id/tv_reviews_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/tv_reviews_label" />
+            android:padding="@dimen/normal"
+            android:text="@string/tv_reviews_label"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/trailer_size"/>
 
-        <TextView
-            android:id="@+id/tv_no_review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/no_reviews"
-            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
+            android:paddingStart="@dimen/small"
             android:id="@+id/recyclerview_reviewList"
-            android:paddingBottom="16dp">
+            android:paddingBottom="@dimen/normal">
 
         </android.support.v7.widget.RecyclerView>
 

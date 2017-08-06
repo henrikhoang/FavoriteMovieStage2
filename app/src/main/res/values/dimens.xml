@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal">16dp</dimen>
+    <dimen name="extra_normal">32dp</dimen>
+    <dimen name="small">8dp</dimen>
+    <dimen name="text_overview_size">18sp</dimen>
+    <dimen name="trailer_size">24sp</dimen>
+    <dimen name="review_comment">368dp</dimen>
+    <dimen name="author">20sp</dimen>
+    <dimen name="comment">18sp</dimen>
+</resources>

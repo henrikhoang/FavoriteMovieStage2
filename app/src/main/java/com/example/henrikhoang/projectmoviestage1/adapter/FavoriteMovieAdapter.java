@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.henrikhoang.projectmoviestage1.FavoriteActivity;
 import com.example.henrikhoang.projectmoviestage1.Film;
@@ -61,10 +60,11 @@ public class FavoriteMovieAdapter extends
         final int id = mCursor.getInt(FavoriteActivity.INDEX_ID);
         Log.d(TAG, "_ID: " + id);
         holder.itemView.setTag(id);
+
         String title = mCursor.getString(FavoriteActivity.INDEX_MOVIE_TITLE);
 
-        holder.movieTitle.setText(title);
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w342" + posterPath)
+//        holder.movieTitle.setText(title);
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500" + posterPath)
                 .into(holder.moviePoster);
 
     }
@@ -83,12 +83,12 @@ public class FavoriteMovieAdapter extends
 
 
     class FavoriteMovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView movieTitle;
+//        final TextView movieTitle;
         ImageView moviePoster;
 
         FavoriteMovieAdapterViewHolder(View view) {
             super(view);
-            movieTitle = (TextView) view.findViewById(R.id.fav_movie_name_tv);
+//            movieTitle = (TextView) view.findViewById(R.id.fav_movie_name_tv);
             moviePoster = (ImageView) view.findViewById(R.id.fav_movie_poster_image_view);
 
             view.setOnClickListener(this);

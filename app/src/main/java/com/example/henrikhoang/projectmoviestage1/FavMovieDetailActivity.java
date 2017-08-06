@@ -23,7 +23,7 @@ public class FavMovieDetailActivity extends AppCompatActivity {
         final Film film = Parcels.unwrap(getIntent().getParcelableExtra("film"));
         mFavMovDetailBinding.favMovieDetailLayout.tvMovieTitle.setText(film.getTitle());
         mFavMovDetailBinding.favMovieDetailLayout.tvReleaseDate.setText(film.getDate());
-        mFavMovDetailBinding.favMovieDetailLayout.tvRating.setText(String.valueOf(film.getVote()));
+        mFavMovDetailBinding.favMovieDetailLayout.tvRating.setText(String.valueOf(film.getVote()) + "/10");
         mFavMovDetailBinding.favMovieDetailLayout.tvOverview.setText(film.getOverview());
 
         Picasso.with(this).load("http://image.tmdb.org/t/p/w500" + film.getPosterPath())

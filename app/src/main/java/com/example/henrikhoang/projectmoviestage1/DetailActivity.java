@@ -9,6 +9,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,8 +27,6 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 
 import java.net.URL;
-
-import static android.view.View.GONE;
 
 public class DetailActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Film>,
@@ -56,7 +55,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
 
         final Film film = Parcels.unwrap(getIntent().getParcelableExtra("film"));
         mDetailBinding.primaryMovieInfo.tvMovieTitle.setText(film.getTitle());
-        mDetailBinding.primaryMovieInfo.tvRating.setText(String.valueOf(film.getVote()));
+        mDetailBinding.primaryMovieInfo.tvRating.setText(String.valueOf(film.getVote()) + "/10");
         mDetailBinding.primaryMovieInfo.tvReleaseDate.setText(film.getDate());
         mDetailBinding.primaryMovieInfo.tvOverview.setText(film.getOverview());
 
@@ -66,8 +65,8 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
         mTrailersRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_trailerList);
         mReviewsRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_reviewList);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mTrailersRecyclerView.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        mTrailersRecyclerView.setLayoutManager(gridLayoutManager);
         mTrailersRecyclerView.setHasFixedSize(true);
         mTrailerAdapter = new TrailerAdapter(this, this);
         mTrailersRecyclerView.setAdapter(mTrailerAdapter);
@@ -130,7 +129,7 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                     @Override
                     protected void onStartLoading() {
 
-                        mDetailBinding.tvNoTrailer.setVisibility(GONE);
+
 
                         if (film != null) {
                             deliverResult(film);
@@ -166,7 +165,6 @@ ReviewAdapter.ReviewAdapterOnClickHandler {
                     @Override
                     protected void onStartLoading() {
 
-                        mDetailBinding.tvNoReview.setVisibility(GONE);
 
                         if (film != null) {
                             deliverResult(film);

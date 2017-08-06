@@ -37,7 +37,7 @@
             android:exported="false" />
 
         <activity android:name=".FavoriteActivity" />
-        <activity android:name=".FavMovieDetailActivity"></activity>
+        <activity android:name=".FavMovieDetailActivity"/>
     </application>
 
 </manifest>

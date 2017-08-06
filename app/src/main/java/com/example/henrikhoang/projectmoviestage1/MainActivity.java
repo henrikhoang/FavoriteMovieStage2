@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements
     private MovieAdapter mMovieAdapter;
     private static final int MOVIE_LOADER_ID = 17;
 
-    private Context mContext;
 
     private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
 
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);

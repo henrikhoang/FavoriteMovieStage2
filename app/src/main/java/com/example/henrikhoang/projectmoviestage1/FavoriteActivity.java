@@ -10,6 +10,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.example.henrikhoang.projectmoviestage1.adapter.FavoriteMovieAdapter;
@@ -35,7 +36,7 @@ public class FavoriteActivity extends AppCompatActivity implements
     public static final int INDEX_MOVIE_ID = 0;
     public static final int INDEX_MOVIE_POSTER = 1;
     public static final int INDEX_MOVIE_TITLE = 2;
-    public static final int INDEX_MVOIE_RELEASE_DATE = 3;
+    public static final int INDEX_MOVIE_RELEASE_DATE = 3;
     public static final int INDEX_MOVIE_VOTE = 4;
     public static final int INDEX_MOVIE_OVERVIEW = 5;
 
@@ -51,7 +52,8 @@ public class FavoriteActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
-        getSupportActionBar().setElevation(0f);
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_favorite);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -60,8 +62,37 @@ public class FavoriteActivity extends AppCompatActivity implements
         mFavMovieAdapter = new FavoriteMovieAdapter(this, this);
         mRecyclerView.setAdapter(mFavMovieAdapter);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+                int id = (int) viewHolder.itemView.getTag();
+                String stringId = Integer.toString(id);
+                Uri uri = MovieContract.MovieEntry.CONTENT_URI;
+                uri = uri.buildUpon().appendPath(stringId).build();
+                getContentResolver().delete(uri, null, null);
+
+                getSupportLoaderManager().restartLoader(ID_FAV_MOVIE_LOADER, null, FavoriteActivity.this);
+            }
+        }).attachToRecyclerView(mRecyclerView);
         getSupportLoaderManager().initLoader(ID_FAV_MOVIE_LOADER, null, this);
 
+
+
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportLoaderManager().restartLoader(ID_FAV_MOVIE_LOADER, null, this);
     }
 
     @Override

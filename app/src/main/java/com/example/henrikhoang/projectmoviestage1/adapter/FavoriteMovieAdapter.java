@@ -99,7 +99,7 @@ public class FavoriteMovieAdapter extends
             film.setId(mCursor.getInt(FavoriteActivity.INDEX_MOVIE_ID));
             film.setOverview(mCursor.getString(FavoriteActivity.INDEX_MOVIE_OVERVIEW));
             film.setVote(mCursor.getDouble(FavoriteActivity.INDEX_MOVIE_VOTE));
-            film.setDate(mCursor.getString(FavoriteActivity.INDEX_MVOIE_RELEASE_DATE));
+            film.setDate(mCursor.getString(FavoriteActivity.INDEX_MOVIE_RELEASE_DATE));
             film.setTitle(mCursor.getString(FavoriteActivity.INDEX_MOVIE_TITLE));
             film.setPosterPath(mCursor.getString(FavoriteActivity.INDEX_MOVIE_POSTER));
             mClickHandler.onClick(film);

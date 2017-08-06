@@ -1,8 +1,8 @@
 package com.example.henrikhoang.projectmoviestage1;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.henrikhoang.projectmoviestage1.databinding.ActivityFavMovieDetailBinding;
 import com.squareup.picasso.Picasso;
@@ -30,6 +30,6 @@ public class FavMovieDetailActivity extends AppCompatActivity {
                 .into(mFavMovDetailBinding.favMovieDetailLayout.ivMoviePoster);
         mFavMovDetailBinding.favMovieDetailLayout.buttonFav.setVisibility(GONE);
 
-
     }
+
 }

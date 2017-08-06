@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
 <android.support.constraint.ConstraintLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,17 +40,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="2016"
-        android:textSize="@string/release_date_fontsize"
+        android:textSize="32sp"
         android:textStyle="italic"
         app:layout_constraintLeft_toRightOf="@+id/iv_movie_poster"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="@dimen/small"
+        android:layout_marginRight="@dimen/small"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_movie_poster"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="@dimen/small"
         app:layout_constraintHorizontal_bias="0.239"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/small"
+        android:layout_marginEnd="@dimen/small"
         android:textColor="@color/colorText"/>
 
     <TextView
@@ -57,8 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="7.7"
-        android:textSize="@string/rating_fontsize"
-        android:layout_marginTop="22dp"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/normal"
         app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
         app:layout_constraintLeft_toLeftOf="@+id/tv_release_date"
         android:textColor="@color/colorText"/>
@@ -68,16 +69,16 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/small"
+        android:layout_marginLeft="@dimen/small"
+        android:layout_marginRight="@dimen/small"
+        android:layout_marginStart="@dimen/small"
         android:background="@drawable/bookmarkmovie"
         app:layout_constraintBottom_toBottomOf="@+id/iv_movie_poster"
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintLeft_toRightOf="@+id/iv_movie_poster"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small"
         app:layout_constraintTop_toBottomOf="@+id/tv_rating"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -86,15 +87,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="ldfkjalkfdjadsklfjasdlkfjdsa faskldfjsadlkjfaslkdjf daslkfj askldjf slkdfad"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/normal"
         app:layout_constraintTop_toBottomOf="@+id/iv_movie_poster"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="@dimen/small"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="@dimen/small"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textColor="@color/colorText"/>
+        android:layout_marginStart="@dimen/small"
+        android:layout_marginEnd="@dimen/small"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_overview_size"/>
 
 
 </android.support.constraint.ConstraintLayout>

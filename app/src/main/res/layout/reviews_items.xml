@@ -12,23 +12,26 @@
         android:layout_height="wrap_content"
         tools:text="Son Hoang"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/normal"
+        android:layout_marginLeft="@dimen/normal"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textStyle="bold"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="@dimen/normal"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/author"/>
 
 
     <TextView
         android:id="@+id/tv_review_comment"
-        android:layout_width="368dp"
+        android:layout_width="@dimen/review_comment"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
+        android:paddingStart="@dimen/small"
         android:paddingEnd="0dp"
-        tools:text="boombhskaasldfjasldkfasdfjadslfjadslfjalksdjflasdkjflaskdjfladsjfalsjfalsfaoisufdsalfjaslkdflmlsauroiq"
+        android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="@+id/tv_review_author"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small"
         app:layout_constraintTop_toBottomOf="@+id/tv_review_author"
-        android:textStyle="italic"/>
+        android:textStyle="italic"
+        android:textSize="@dimen/comment"/>
 
 </LinearLayout>

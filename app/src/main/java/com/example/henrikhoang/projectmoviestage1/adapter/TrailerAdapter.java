@@ -48,8 +48,8 @@ public class TrailerAdapter extends
 
     @Override
     public void onBindViewHolder(TrailerAdapterViewHolder holder, int position) {
-        int trailerNumber = position;
-        holder.mTrailerNumberTextView.setText("Trailer " + mFilm.getTrailerId()[trailerNumber]);
+        int trailerNumber = position + 1;
+        holder.mTrailerNumberTextView.setText("Trailer " + String.valueOf(trailerNumber));
 
     }
 

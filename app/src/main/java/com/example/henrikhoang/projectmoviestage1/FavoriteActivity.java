@@ -74,7 +74,7 @@ public class FavoriteActivity extends AppCompatActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-                int id = (int) viewHolder.itemView.getId();
+                int id = (int) viewHolder.itemView.getTag();
                 String stringId = Integer.toString(id);
                 Uri uri = MovieContract.MovieEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();
@@ -84,8 +84,6 @@ public class FavoriteActivity extends AppCompatActivity implements
             }
         }).attachToRecyclerView(mRecyclerView);
         getSupportLoaderManager().initLoader(ID_FAV_MOVIE_LOADER, null, this);
-
-
 
     }
 

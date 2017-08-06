@@ -31,4 +31,8 @@
     <string name="favourite_button">Mark as Favorite</string>
     <string name="action_favorite">Favorite</string>
 
+    <!--Font Size-->
+    <string name="release_date_fontsize">32sp</string>
+    <string name="rating_fontsize">32sp</string>
+
 </resources>

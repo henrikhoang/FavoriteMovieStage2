@@ -31,6 +31,7 @@ public class FavoriteActivity extends AppCompatActivity implements
             MovieContract.MovieEntry.COLUMN_RELEASE_DATE,
             MovieContract.MovieEntry.COLUMN_VOTE,
             MovieContract.MovieEntry.COLUMN_OVERVIEW,
+            MovieContract.MovieEntry._ID,
     };
 
     public static final int INDEX_MOVIE_ID = 0;
@@ -39,6 +40,7 @@ public class FavoriteActivity extends AppCompatActivity implements
     public static final int INDEX_MOVIE_RELEASE_DATE = 3;
     public static final int INDEX_MOVIE_VOTE = 4;
     public static final int INDEX_MOVIE_OVERVIEW = 5;
+    public static final int INDEX_ID = 6;
 
 
     private static final int ID_FAV_MOVIE_LOADER = 18;
@@ -72,7 +74,7 @@ public class FavoriteActivity extends AppCompatActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-                int id = (int) viewHolder.itemView.getTag();
+                int id = (int) viewHolder.itemView.getId();
                 String stringId = Integer.toString(id);
                 Uri uri = MovieContract.MovieEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();

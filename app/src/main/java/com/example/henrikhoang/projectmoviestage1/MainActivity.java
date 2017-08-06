@@ -182,24 +182,29 @@ public class MainActivity extends AppCompatActivity implements
     //activities for menu items
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
 
-            case R.id.action_refresh:
+        int selection = item.getItemId();
+
+            if (selection == R.id.action_refresh) {
                 invalidateData();
                 getSupportLoaderManager().restartLoader(MOVIE_LOADER_ID, null, this);
                 return true;
+            }
 
-            case R.id.action_settings:
+
+            if (selection == R.id.action_settings) {
                 Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
                 startActivity(startSettingsActivity);
+                return true;
+            }
 
-            case R.id.action_favorite:
+            if (selection == R.id.action_favorite) {
                 Intent startFavoriteList = new Intent(this, FavoriteActivity.class);
                 startActivity(startFavoriteList);
-
-            default:
+                return true;
+            }
                 return super.onOptionsItemSelected(item);
-        }
+
     }
 
     @Override

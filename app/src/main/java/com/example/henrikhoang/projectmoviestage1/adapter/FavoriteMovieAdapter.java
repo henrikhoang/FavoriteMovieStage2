@@ -57,7 +57,10 @@ public class FavoriteMovieAdapter extends
 
         Log.d(TAG, "DATABASE POSTER PATH: " + posterPath);
 
-        int id = mCursor.getInt(FavoriteActivity.INDEX_MOVIE_ID);
+
+        final int id = mCursor.getInt(FavoriteActivity.INDEX_ID);
+        Log.d(TAG, "_ID: " + id);
+        holder.itemView.setTag(id);
         String title = mCursor.getString(FavoriteActivity.INDEX_MOVIE_TITLE);
 
         holder.movieTitle.setText(title);
